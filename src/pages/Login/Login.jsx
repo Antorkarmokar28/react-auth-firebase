@@ -1,14 +1,22 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [showPassWord, setShowPassword] = useState(false);
   const handleSignInForm = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const terms = e.target.terms.checked;
+    if (!terms) {
+      setErrorMessage("Please accept our terms and condition!");
+      return;
+    }
+    // clear error state
     setErrorMessage("");
     setSuccess(false);
     // regular expression
@@ -43,12 +51,24 @@ const Login = () => {
           placeholder="Email"
         />
         <br />
-        <input
-          className="w-full p-2 rounded"
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
+        <div className="relative">
+          <input
+            className="w-full p-2 rounded"
+            type={showPassWord ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+          />
+          <button
+            onClick={() => setShowPassword(!showPassWord)}
+            className="btn btn-sm absolute top-1 right-2"
+          >
+            {showPassWord ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
+        <label className="label">
+          <input type="checkbox" name="terms" className="checkbox" />
+          Accept Our Terms and Condition
+        </label>
         <br />
         <input
           className="w-full btn bg-violet-600 hover:bg-violet-500 text-gray-200"
