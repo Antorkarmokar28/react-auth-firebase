@@ -8,7 +8,7 @@ const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [showPassWord, setShowPassword] = useState(false);
-  const handleSignInForm = (e) => {
+  const handleSignUpForm = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -43,7 +43,7 @@ const SignUp = () => {
       <h1 className="text-6xl mb-6 text-center">Please Sign Up</h1>
       <form
         className="w-1/4 mx-auto p-4 rounded-2xl shadow-2xl space-y-6"
-        onSubmit={handleSignInForm}
+        onSubmit={handleSignUpForm}
       >
         <input
           className="w-full p-2 rounded"
@@ -98,7 +98,7 @@ const SignUp = () => {
           </Link>
         </p>
         {success && (
-          <p className="mt-6 text-green-600">User login successfully</p>
+          <p className="mt-6 text-green-600">User Sign Up successfully</p>
         )}
         <p className="mt-6 text-red-600">{errorMessage}</p>
       </form>
