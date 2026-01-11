@@ -1,13 +1,14 @@
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
-import { useState } from "react";
+import { sendEmailVerification } from "firebase/auth";
+import { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { auth } from "../../firebase/firebase.init";
 import { Link } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
 
 const SignUp = () => {
+  // use context api
+  const { createUser } = use(AuthContext);
+  console.log(createUser);
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [showPassWord, setShowPassword] = useState(false);
@@ -32,7 +33,7 @@ const SignUp = () => {
       return;
     }
     // create user
-    createUserWithEmailAndPassword(auth, email, password)
+    createUser(auth, email, password)
       .then((result) => {
         console.log(result);
         // send email for email verification

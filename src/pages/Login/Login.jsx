@@ -4,9 +4,13 @@ import {
 } from "firebase/auth";
 import { Link } from "react-router";
 import { auth } from "../../firebase/firebase.init";
-import { useRef, useState } from "react";
+import { use, useRef, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
+  // use context api
+  const { signInUser } = use(AuthContext);
+  console.log(signInUser);
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const emailRef = useRef();
